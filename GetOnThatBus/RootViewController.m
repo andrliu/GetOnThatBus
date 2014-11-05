@@ -149,23 +149,21 @@
     Annotation *busStopAnnotation = view.annotation;
     int indexCount = busStopAnnotation.tag;
     BusStop *busStop= self.busStopArray[indexCount];
-    [self performSegueWithIdentifier:@"detailSegue" sender:busStop];
+    [self performSegueWithIdentifier:@"mapSegue" sender:busStop];
 }
 
 - (IBAction)switchView:(UISegmentedControl *)sender
 {
-    if (sender.selectedSegmentIndex == 0)
+    if (sender.selectedSegmentIndex == 1)
     {
         [UIView transitionFromView:self.mapView toView:self.tableView duration:0.4 options:UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionTransitionFlipFromBottom
                         completion:^(BOOL finished) {
-                            [self.tableView reloadData];
                         }];
     }
     else
     {
         [UIView transitionFromView:self.tableView toView:self.mapView duration:0.4 options:UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionTransitionFlipFromBottom
                         completion:^(BOOL finished) {
-                            [self.tableView reloadData];
                         }];
     }
 
@@ -174,8 +172,17 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:busStop
 {
-    DetailViewController *dvc = segue.destinationViewController;
-    dvc.busStop = busStop;
+    if ([segue.identifier isEqual:@"tableViewSegue"])
+    {
+        DetailViewController *dvc = segue.destinationViewController;
+        NSInteger rowNumber = [self.tableView indexPathForSelectedRow].row;
+        BusStop *busStop  = [self.busStopArray objectAtIndex:rowNumber];
+        dvc.busStop = busStop;
+    }
+    else if ([segue.identifier isEqual:@"mapSegue"])
+    {
+        DetailViewController *dvc = segue.destinationViewController;
+        dvc.busStop = busStop;
+    }
 }
-
 @end

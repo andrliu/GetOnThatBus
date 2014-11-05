@@ -17,26 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ejq-be-xhi">
-                                <rect key="frame" x="250" y="568" width="100" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="VuU-aQ-GEd"/>
-                                    <constraint firstAttribute="width" constant="100" id="k29-QN-PVC"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Map"/>
-                                    <segment title="Table"/>
-                                </segments>
-                                <connections>
-                                    <action selector="switchView:" destination="vXZ-lx-hvc" eventType="valueChanged" id="DjR-xI-VKM"/>
-                                </connections>
-                            </segmentedControl>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OAJ-NS-iYN">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="565"/>
-                                <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="ddM-Ja-IlY"/>
-                                </connections>
-                            </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Swx-nI-BF6">
                                 <rect key="frame" x="0.0" y="64" width="600" height="501"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -62,7 +42,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ajh-Gd-w22" kind="push" identifier="detailSegue" id="Czt-mR-Wsk"/>
+                                            <segue destination="ajh-Gd-w22" kind="push" identifier="tableViewSegue" id="Czt-mR-Wsk"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -71,33 +51,47 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="faz-ff-bJM"/>
                                 </connections>
                             </tableView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OAJ-NS-iYN">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="565"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="ddM-Ja-IlY"/>
+                                </connections>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ejq-be-xhi">
+                                <rect key="frame" x="250" y="568" width="100" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="VuU-aQ-GEd"/>
+                                    <constraint firstAttribute="width" constant="100" id="k29-QN-PVC"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Map"/>
+                                    <segment title="Table"/>
+                                </segments>
+                                <connections>
+                                    <action selector="switchView:" destination="vXZ-lx-hvc" eventType="valueChanged" id="DjR-xI-VKM"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Swx-nI-BF6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="5dg-Wp-fr3"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Ejq-be-xhi" secondAttribute="bottom" constant="2" id="Clg-Bf-BqJ"/>
-                            <constraint firstItem="Ejq-be-xhi" firstAttribute="top" secondItem="OAJ-NS-iYN" secondAttribute="bottom" constant="3" id="FiU-QG-Z69"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="OAJ-NS-iYN" secondAttribute="trailing" constant="-16" id="QO2-sV-XGu"/>
-                            <constraint firstItem="OAJ-NS-iYN" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="RkR-uE-zm7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OAJ-NS-iYN" secondAttribute="trailing" constant="-16" id="VoP-AZ-Q4R"/>
                             <constraint firstAttribute="centerX" secondItem="Ejq-be-xhi" secondAttribute="centerX" id="W7a-5l-8I6"/>
                             <constraint firstItem="Ejq-be-xhi" firstAttribute="top" secondItem="Swx-nI-BF6" secondAttribute="bottom" constant="3" id="hCd-Z3-zKt"/>
+                            <constraint firstItem="Ejq-be-xhi" firstAttribute="top" secondItem="OAJ-NS-iYN" secondAttribute="bottom" constant="3" id="mBK-nQ-I41"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Swx-nI-BF6" secondAttribute="trailing" constant="-16" id="nng-x4-bRD"/>
+                            <constraint firstItem="OAJ-NS-iYN" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="q71-b5-S0k"/>
                             <constraint firstItem="Swx-nI-BF6" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="vbE-W8-TW0"/>
-                            <constraint firstItem="OAJ-NS-iYN" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="xkw-tv-JV6"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="OAJ-NS-iYN" secondAttribute="bottom" constant="35" id="zVj-ff-qWE"/>
+                            <constraint firstItem="OAJ-NS-iYN" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="zir-iN-NOX"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="zVj-ff-qWE"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="UBm-tm-zPO"/>
                     <connections>
                         <outlet property="displaySegmentControl" destination="Ejq-be-xhi" id="Y7i-yG-LGk"/>
                         <outlet property="mapView" destination="OAJ-NS-iYN" id="Pgc-Ji-hWQ"/>
                         <outlet property="tableView" destination="Swx-nI-BF6" id="Wk4-gW-qoa"/>
-                        <segue destination="ajh-Gd-w22" kind="push" identifier="detailSegue" id="FXJ-Ex-C55"/>
+                        <segue destination="ajh-Gd-w22" kind="push" identifier="mapSegue" id="FXJ-Ex-C55"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -129,7 +123,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bus routes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkS-fk-623">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bus routes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="qkS-fk-623">
                                 <rect key="frame" x="0.0" y="536" width="600" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="bAV-fd-K4l"/>

@@ -23,9 +23,9 @@
 
     self.navigationItem.title = self.busStop.name;
 
-    self.detailOfRoute.text = self.busStop.route;
+    self.detailOfRoute.text = [NSString stringWithFormat:@"Route: %@", self.busStop.route];
 
-    self.detailOfIntermodal.text = self.busStop.intermodal;
+    self.detailOfIntermodal.text = [NSString stringWithFormat:@"Transportation: %@", self.busStop.intermodal];
 
     NSURL *url = [NSURL URLWithString :self.busStop.address];
 
