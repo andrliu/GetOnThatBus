@@ -27,8 +27,6 @@
     self.address = busStopDictionary[@"_address"];
 
     return self;
-
-
 }
 
 @end

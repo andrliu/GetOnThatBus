@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="satellite" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAJ-NS-iYN">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OAJ-NS-iYN">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="ddM-Ja-IlY"/>
@@ -35,7 +35,7 @@
                     <navigationItem key="navigationItem" id="UBm-tm-zPO"/>
                     <connections>
                         <outlet property="mapView" destination="OAJ-NS-iYN" id="Pgc-Ji-hWQ"/>
-                        <segue destination="ajh-Gd-w22" kind="push" id="FXJ-Ex-C55"/>
+                        <segue destination="ajh-Gd-w22" kind="push" identifier="detailSegue" id="FXJ-Ex-C55"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

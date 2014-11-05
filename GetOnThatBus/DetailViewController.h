@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BusStop.h"
 
 @interface DetailViewController : UIViewController
+@property BusStop *busStop;
 
 @end

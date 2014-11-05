@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface BusStop : NSObject
+
 @property NSNumber *latitude;
 @property NSNumber *longitude;
 @property NSString *name;
