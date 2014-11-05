@@ -10,12 +10,12 @@
 
 @interface BusStop : NSObject
 
-@property NSNumber *latitude;
-@property NSNumber *longitude;
-@property NSString *name;
-@property NSString *route;
-@property NSString *intermodal;
-@property NSString *address;
+@property (readonly) NSNumber *latitude;
+@property (readonly) NSNumber *longitude;
+@property (readonly) NSString *name;
+@property (readonly) NSString *route;
+@property (readonly) NSString *intermodal;
+@property (readonly) NSString *address;
 
 - (instancetype) initWithDictionary:(NSDictionary *)busStopDictionary;
 

@@ -16,10 +16,13 @@
 #define kMobileMakersLatitude 41.89374
 #define kMobileMakersLongitude -87.63533
 
-@interface RootViewController () <MKMapViewDelegate>
+@interface RootViewController () <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *displaySegmentControl;
 @property NSMutableArray *busStopArray;
-@property NSMutableDictionary *busStopDictionary;
+@property NSMutableArray *metraArray;
+@property NSMutableArray *paceArray;
 
 @end
 
@@ -31,7 +34,8 @@
     [self initialLocation];
     [self loadTransitStops:kTransitStops];
     self.busStopArray = [NSMutableArray array];
-    self.busStopDictionary = [NSMutableDictionary dictionary];
+    self.metraArray = [NSMutableArray array];
+    self.paceArray = [NSMutableArray array];
 }
 
 - (void)initialLocation
@@ -77,28 +81,48 @@
                         busStopAnnotation.coordinate = CLLocationCoordinate2DMake([busStop.latitude doubleValue], [busStop.longitude doubleValue]);
                         busStopAnnotation.title = busStop.name;
                         busStopAnnotation.subtitle = busStop.route;
-
-
-
                         if ([busStop.intermodal isEqual:@"Metra"])
                         {
-                            [self.busStopDictionary setObject:busStopAnnotation.title forKey:@"Metra"];
+                            [self.metraArray addObject:busStopAnnotation.title];
                         }
-                        else if ([busStop.intermodal isEqual:@"Pace"])
+
+                        if ([busStop.intermodal isEqual:@"Pace"])
                         {
-                            [self.busStopDictionary setObject:busStopAnnotation.title forKey:@"Pace"];
+                            [self.paceArray addObject:busStopAnnotation.title];
                         }
-
-
                         [self.mapView addAnnotation:busStopAnnotation];
                         indexCount++;
                     }
+                    [self.tableView reloadData];
                 }
             }
      ];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.busStopArray.count;
+}
 
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
+    BusStop *busStopName = self.busStopArray [indexPath.row];
+
+    cell.textLabel.text = busStopName.name;
+
+    BusStop *busStopRoute = self.busStopArray [indexPath.row];
+
+    cell.detailTextLabel.text = busStopRoute.route;
+
+//    cell.textLabel.text = [self.busStopArray [indexPath.row] name];
+
+//    cell.detailTextLabel.text = [self.busStopArray [indexPath.row] route];
+
+    return cell;
+}
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
@@ -106,18 +130,15 @@
     pin.canShowCallout = YES;
     pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 
-
-    if ([[annotation title] isEqual: self.busStopDictionary[@"Metra"]])
+    if ([self.metraArray containsObject: [annotation title]])
     {
         pin.pinColor = MKPinAnnotationColorGreen;
     }
-    if ([[annotation title] isEqual:self.busStopDictionary[@"Pace"]])
+
+    if ([self.paceArray containsObject: [annotation title]])
     {
         pin.pinColor = MKPinAnnotationColorPurple;
     }
-
-
-
 
     return pin;
 }
@@ -129,6 +150,26 @@
     int indexCount = busStopAnnotation.tag;
     BusStop *busStop= self.busStopArray[indexCount];
     [self performSegueWithIdentifier:@"detailSegue" sender:busStop];
+}
+
+- (IBAction)switchView:(UISegmentedControl *)sender
+{
+    if (sender.selectedSegmentIndex == 0)
+    {
+        [UIView transitionFromView:self.mapView toView:self.tableView duration:0.4 options:UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionTransitionFlipFromBottom
+                        completion:^(BOOL finished) {
+                            [self.tableView reloadData];
+                        }];
+    }
+    else
+    {
+        [UIView transitionFromView:self.tableView toView:self.mapView duration:0.4 options:UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionTransitionFlipFromBottom
+                        completion:^(BOOL finished) {
+                            [self.tableView reloadData];
+                        }];
+    }
+
+
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:busStop

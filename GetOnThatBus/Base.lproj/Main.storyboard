@@ -17,24 +17,86 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ejq-be-xhi">
+                                <rect key="frame" x="250" y="568" width="100" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="VuU-aQ-GEd"/>
+                                    <constraint firstAttribute="width" constant="100" id="k29-QN-PVC"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Map"/>
+                                    <segment title="Table"/>
+                                </segments>
+                                <connections>
+                                    <action selector="switchView:" destination="vXZ-lx-hvc" eventType="valueChanged" id="DjR-xI-VKM"/>
+                                </connections>
+                            </segmentedControl>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OAJ-NS-iYN">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="565"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="ddM-Ja-IlY"/>
                                 </connections>
                             </mapView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Swx-nI-BF6">
+                                <rect key="frame" x="0.0" y="64" width="600" height="501"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="Iyn-8J-55z" detailTextLabel="dGi-9K-jMi" style="IBUITableViewCellStyleSubtitle" id="JzU-AB-vYQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JzU-AB-vYQ" id="Aic-R9-SmX">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Iyn-8J-55z">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dGi-9K-jMi">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ajh-Gd-w22" kind="push" identifier="detailSegue" id="Czt-mR-Wsk"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="uUK-2c-IWk"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="faz-ff-bJM"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Swx-nI-BF6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="5dg-Wp-fr3"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Ejq-be-xhi" secondAttribute="bottom" constant="2" id="Clg-Bf-BqJ"/>
+                            <constraint firstItem="Ejq-be-xhi" firstAttribute="top" secondItem="OAJ-NS-iYN" secondAttribute="bottom" constant="3" id="FiU-QG-Z69"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OAJ-NS-iYN" secondAttribute="trailing" constant="-16" id="QO2-sV-XGu"/>
                             <constraint firstItem="OAJ-NS-iYN" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="RkR-uE-zm7"/>
+                            <constraint firstAttribute="centerX" secondItem="Ejq-be-xhi" secondAttribute="centerX" id="W7a-5l-8I6"/>
+                            <constraint firstItem="Ejq-be-xhi" firstAttribute="top" secondItem="Swx-nI-BF6" secondAttribute="bottom" constant="3" id="hCd-Z3-zKt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Swx-nI-BF6" secondAttribute="trailing" constant="-16" id="nng-x4-bRD"/>
+                            <constraint firstItem="Swx-nI-BF6" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="vbE-W8-TW0"/>
                             <constraint firstItem="OAJ-NS-iYN" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="xkw-tv-JV6"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="OAJ-NS-iYN" secondAttribute="bottom" id="zVj-ff-qWE"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="OAJ-NS-iYN" secondAttribute="bottom" constant="35" id="zVj-ff-qWE"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="zVj-ff-qWE"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="UBm-tm-zPO"/>
                     <connections>
+                        <outlet property="displaySegmentControl" destination="Ejq-be-xhi" id="Y7i-yG-LGk"/>
                         <outlet property="mapView" destination="OAJ-NS-iYN" id="Pgc-Ji-hWQ"/>
+                        <outlet property="tableView" destination="Swx-nI-BF6" id="Wk4-gW-qoa"/>
                         <segue destination="ajh-Gd-w22" kind="push" identifier="detailSegue" id="FXJ-Ex-C55"/>
                     </connections>
                 </viewController>
@@ -129,4 +191,7 @@
             <point key="canvasLocation" x="-429" y="176"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Czt-mR-Wsk"/>
+    </inferredMetricsTieBreakers>
 </document>

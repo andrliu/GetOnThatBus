@@ -14,17 +14,17 @@
 {
     self = [super init];
 
-    self.latitude = busStopDictionary[@"latitude"];
+    _latitude = busStopDictionary[@"latitude"];
 
-    self.longitude = busStopDictionary[@"longitude"];
+    _longitude = busStopDictionary[@"longitude"];
 
-    self.name = busStopDictionary[@"cta_stop_name"];
+    _name = busStopDictionary[@"cta_stop_name"];
 
-    self.route = busStopDictionary[@"routes"];
+    _route = busStopDictionary[@"routes"];
 
-    self.intermodal = busStopDictionary[@"inter_modal"];
+    _intermodal = busStopDictionary[@"inter_modal"];
 
-    self.address = busStopDictionary[@"_address"];
+    _address = busStopDictionary[@"_address"];
 
     return self;
 }
