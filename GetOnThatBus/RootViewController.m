@@ -170,19 +170,18 @@
 
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger rowNumber = [self.tableView indexPathForSelectedRow].row;
+    BusStop *busStop  = [self.busStopArray objectAtIndex:rowNumber];
+    [self performSegueWithIdentifier:@"mapSegue" sender:busStop];
+}
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:busStop
 {
-    if ([segue.identifier isEqual:@"tableViewSegue"])
-    {
-        DetailViewController *dvc = segue.destinationViewController;
-        NSInteger rowNumber = [self.tableView indexPathForSelectedRow].row;
-        BusStop *busStop  = [self.busStopArray objectAtIndex:rowNumber];
-        dvc.busStop = busStop;
-    }
-    else if ([segue.identifier isEqual:@"mapSegue"])
-    {
+
         DetailViewController *dvc = segue.destinationViewController;
         dvc.busStop = busStop;
-    }
+
 }
 @end
